@@ -4,7 +4,6 @@ function getComputerChoice() {
     2: "Paper",
     3: "Scissors",
   };
-
   var rand = Math.floor(Math.random() * Object.keys(choices).length) + 1;
   return choices[rand].toLowerCase();
 }
@@ -14,5 +13,17 @@ function getHumanChoice() {
   return answer.toLowerCase();
 }
 
-console.log(getHumanChoice());
-console.log(getComputerChoice());
+function playGame() {
+  let humanScore = 0;
+  let computerScore = 0;
+  const humanSelection = getHumanChoice();
+  const computerSelection = getComputerChoice();
+
+  function playRound(humanSelection, computerSelection) {
+    if (humanSelection === computerSelection) {
+      return console.log("draw!");
+    }
+  }
+  playRound(humanSelection, computerSelection);
+}
+playGame();
