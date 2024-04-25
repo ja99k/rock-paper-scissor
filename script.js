@@ -1,23 +1,23 @@
-var choices = {
+const choices = {
   1: "Rock",
   2: "Paper",
   3: "Scissors",
 };
 
 function getComputerChoice() {
-  var rand = Math.floor(Math.random() * Object.keys(choices).length) + 1;
+  const rand = Math.floor(Math.random() * Object.keys(choices).length) + 1;
   return choices[rand].toLowerCase();
 }
 
 function getHumanChoice() {
-  var answer = prompt("Rock, Paper, or Scissors?");
+  let answer = prompt("Rock, Paper, or Scissors?");
   return answer.toLowerCase();
 }
 
-var roundsToPlay = 5;
-var roundsPlayed = 0;
-var humanScore = 0;
-var computerScore = 0;
+const roundsToPlay = 5;
+let roundsPlayed = 0;
+let humanScore = 0;
+let computerScore = 0;
 
 function playRound(humanSelection, computerSelection) {
   console.log(`Your selection: ${humanSelection}`);
