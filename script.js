@@ -15,9 +15,9 @@ function getHumanChoice() {
 }
 
 const roundsToPlay = 5;
-let roundsPlayed = 0;
-let humanScore = 0;
-let computerScore = 0;
+var roundsPlayed = 0;
+var humanScore = 0;
+var computerScore = 0;
 
 function playRound(humanSelection, computerSelection) {
   console.log(`Your selection: ${humanSelection}`);
