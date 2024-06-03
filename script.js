@@ -1,51 +1,84 @@
-const choices = {
-  1: "Rock",
-  2: "Paper",
-  3: "Scissors",
-};
+document.addEventListener("DOMContentLoaded", () => {
+  const div = document.createElement("div");
+  const rootNode = document.getElementById("root");
 
-function getComputerChoice() {
-  const rand = Math.floor(Math.random() * Object.keys(choices).length) + 1;
-  return choices[rand].toLowerCase();
-}
-
-function getHumanChoice() {
-  let answer = prompt("Rock, Paper, or Scissors?");
-  return answer.toLowerCase();
-}
-
-const roundsToPlay = 5;
-var roundsPlayed = 0;
-var humanScore = 0;
-var computerScore = 0;
-
-function playRound(humanSelection, computerSelection) {
-  console.log(`Your selection: ${humanSelection}`);
-  console.log(`Computer's selection: ${computerSelection}`);
-
-  if (humanSelection === computerSelection) {
-      console.log("It's a draw!");
-  } else if ((humanSelection === 'rock' && computerSelection === 'scissors') ||
-             (humanSelection === 'scissors' && computerSelection === 'paper') ||
-             (humanSelection === 'paper' && computerSelection === 'rock')) {
-      humanScore++;
-      console.log("You win this round!");
-  } else {
-      computerScore++;
-      console.log("Computer wins this round!");
+  rootNode.appendChild(div);
+  function createDiv(elementType, text, parentNode) {
+    const element = document.createElement(elementType);
+    element.textContent = text;
+    parentNode.appendChild(element);
+    return element;
   }
 
-  roundsPlayed++;
-  console.log(`Score - You: ${humanScore}, Computer: ${computerScore}`);
-}
+  const rockButton = createDiv("button", "Rock", rootNode);
+  const paperButton = createDiv("button", "Paper", rootNode);
+  const scissorsButton = createDiv("button", "Scissors", rootNode);
 
-function playGame() {
-  while (roundsPlayed < roundsToPlay) {
+  rockButton.addEventListener("click", () => {
+    playRound("rock", getComputerChoice());
+  });
+
+  paperButton.addEventListener("click", () => {
+    playRound("paper", getComputerChoice());
+  });
+
+  scissorsButton.addEventListener("click", () => {
+    playRound("scissors", getComputerChoice());
+  });
+
+  const choices = {
+    1: "Rock",
+    2: "Paper",
+    3: "Scissors",
+  };
+
+  function getComputerChoice() {
+    const rand = Math.floor(Math.random() * Object.keys(choices).length) + 1;
+    return choices[rand].toLowerCase();
+  }
+
+  const roundsToPlay = 5;
+  let roundsPlayed = 0;
+  let humanScore = 0;
+  let computerScore = 0;
+
+  function playRound(humanSelection, computerSelection) {
+    createDiv("div", "Player choice: " + humanSelection, rootNode);
+    createDiv("div", "Computer choice: " + computerSelection, rootNode);
+
+    if (humanSelection === computerSelection) {
+      createDiv("div", "It's a draw!", rootNode);
+    } else if (
+      (humanSelection === "rock" && computerSelection === "scissors") ||
+      (humanSelection === "scissors" && computerSelection === "paper") ||
+      (humanSelection === "paper" && computerSelection === "rock")
+    ) {
+      humanScore++;
+      createDiv("div", "You win this round!", rootNode);
+    } else {
+      computerScore++;
+      createDiv("div", "Computer wins this round!", rootNode);
+    }
+
+    roundsPlayed++;
+    createDiv(
+      "div",
+      `Score - You: ${humanScore}, Computer: ${computerScore}`,
+      rootNode
+    );
+  }
+
+  function playGame() {
+    while (roundsPlayed < roundsToPlay) {
       const humanSelection = getHumanChoice();
       const computerSelection = getComputerChoice();
       playRound(humanSelection, computerSelection);
+    }
+    createDiv(
+      "div",
+      `Total score: You: ${humanScore}, Computer: ${computerScore}`,
+      rootNode
+    );
   }
-  console.log("Game over!");
-}
-
-playGame();
+  playGame();
+});
