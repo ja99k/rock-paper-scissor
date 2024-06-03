@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return choices[rand].toLowerCase();
   }
 
-  const roundsToPlay = 5;
+  let roundsToPlay = 5;
   let roundsPlayed = 0;
   let humanScore = 0;
   let computerScore = 0;
@@ -66,19 +66,16 @@ document.addEventListener("DOMContentLoaded", () => {
       `Score - You: ${humanScore}, Computer: ${computerScore}`,
       rootNode
     );
-  }
-
-  function playGame() {
-    while (roundsPlayed < roundsToPlay) {
-      const humanSelection = getHumanChoice();
-      const computerSelection = getComputerChoice();
-      playRound(humanSelection, computerSelection);
+    if (roundsPlayed === roundsToPlay) {
+      createDiv(
+        "div",
+        `Game over! Final score - You: ${humanScore}, Computer: ${computerScore}`,
+        rootNode);
+        rockButton.disabled = true;
+        paperButton.disabled = true;
+        scissorsButton.disabled = true;
+      
     }
-    createDiv(
-      "div",
-      `Total score: You: ${humanScore}, Computer: ${computerScore}`,
-      rootNode
-    );
+   
   }
-  playGame();
 });
